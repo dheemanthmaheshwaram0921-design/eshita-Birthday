@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOR ESHITA ✨</title>
+    <style>
+        :root { --hot-pink: #ff006e; --glass: rgba(255, 255, 255, 0.1); }
+        body, html {
+            margin: 0; padding: 0; background: #000;
+            font-family: -apple-system, system-ui, sans-serif;
+            height: 100vh; overflow: hidden; color: white;
+        }
+
+        /* Warp Drive Intro */
+        #warp-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100; background: #000; display: flex;
+            align-items: center; justify-content: center;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .warp-text {
+            font-size: 5rem; font-weight: 900; letter-spacing: 15px;
+            background: linear-gradient(to right, #ff006e, #ffafcc, #ffffff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse { from { transform: scale(1); filter: blur(2px); } to { transform: scale(1.1); filter: blur(0px); } }
+
+        /* Main Content */
+        #main-stage {
+            display: grid; height: 100vh; width: 100vw;
+            grid-template-columns: 1fr 2fr 1fr; align-items: center;
+            background: radial-gradient(circle at center, #2b001e 0%, #000 100%);
+            opacity: 0; transition: opacity 3s; padding: 20px; box-sizing: border-box;
+        }
+
+        /* 3D Photo Carousel */
+        .carousel-container { perspective: 1200px; z-index: 5; }
+        .carousel {
+            position: relative; width: 240px; height: 340px; margin: auto;
+            transform-style: preserve-3d; animation: rotate 20s infinite linear;
+        }
+        .carousel img {
+            position: absolute; width: 100%; height: 100%;
+            object-fit: cover; border-radius: 20px;
+            box-shadow: 0 0 50px var(--hot-pink);
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: transform 0.5s;
+        }
+        .carousel img:hover { transform: scale(1.2) !important; z-index: 50; }
+
+        .carousel img:nth-child(1) { transform: rotateY(0deg) translateZ(350px); }
+        .carousel img:nth-child(2) { transform: rotateY(72deg) translateZ(350px); }
+        .carousel img:nth-child(3) { transform: rotateY(144deg) translateZ(350px); }
+        .carousel img:nth-child(4) { transform: rotateY(216deg) translateZ(350px); }
+        .carousel img:nth-child(5) { transform: rotateY(288deg) translateZ(350px); }
+
+        @keyframes rotate { from { transform: rotateY(0); } to { transform: rotateY(360deg); } }
+
+        /* Apple Music Lyrics Engine */
+        .lyrics-box {
+            position: absolute; bottom: 60px; width: 100%; text-align: center;
+            font-size: 3rem; font-weight: 900; pointer-events: none;
+        }
+        .lyric {
+            opacity: 0; filter: blur(15px); transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.1, 0.9, 0.2, 1);
+            position: absolute; width: 100%; left: 0;
+        }
+        .lyric.active { opacity: 1; filter: blur(0); transform: scale(1.1); color: #fff; text-shadow: 0 0 40px var(--hot-pink); }
+
+        /* Floating Apple Emojis */
+        .emoji-float {
+            position: absolute; width: 60px; pointer-events: none;
+            animation: float-up 10s linear infinite; z-index: 1;
+        }
+        @keyframes float-up { from { transform: translateY(110vh) rotate(0); } to { transform: translateY(-20vh) rotate(720deg); } }
+
+        /* Glass Cards */
+        .side-col { display: flex; flex-direction: column; gap: 30px; }
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(30px);
+            padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.2rem; text-align: center; box-shadow: 0 15px 35px rgba(255,0,110,0.2);
+        }
+    </style>
+</head>
+<body onclick="launch()">
+
+    <div id="warp-bg">
+        <div class="warp-text">CLICK TO UNLOCK ❤️</div>
+    </div>
+
+    <div id="main-stage">
+        <div class="side-col">
+            <div class="glass-card">💍 You are my today and all of my tomorrows.</div>
+            <div class="glass-card">💖 Eshita, you make the world brighter.</div>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="img1.jpg"> <img src="img2.jpg"> <img src="img3.jpg"> <img src="img4.jpg"> <img src="img5.jpg">
+            </div>
+        </div>
+        <div class="side-col">
+            <div class="glass-card">🎂 Happy Birthday to the queen of my heart!</div>
+            <div class="glass-card">✨ I found my 'Perfect' in you.</div>
+        </div>
+        <div class="lyrics-box" id="lyric-engine"></div>
+    </div>
+
+    <audio id="audio" src="music.mp3"></audio>
+
+    <script>
+        const lyrics = [
+            { t: 0, text: "Happy Birthday Eshita... ❤️" },
+            { t: 4, text: "I found a love... for me" },
+            { t: 9, text: "Darling, just dive right in" },
+            { t: 14, text: "And follow my lead" },
+            { t: 19, text: "I found a girl, beautiful and sweet" },
+            { t: 25, text: "I never knew you were the someone..." }
+        ];
+
+        function launch() {
+            document.getElementById('warp-bg').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('warp-bg').style.display = 'none';
+                document.getElementById('main-stage').style.opacity = '1';
+            }, 1000);
+
+            const audio = document.getElementById('audio');
+            audio.play();
+
+            // Spawn Particles
+            const emojis = ['heart.png', 'cake.png', 'gift.png'];
+            for(let i=0; i<20; i++) {
+                let img = document.createElement('img');
+                img.src = emojis[Math.floor(Math.random()*emojis.length)];
+                img.className = 'emoji-float';
+                img.style.left = Math.random() * 100 + 'vw';
+                img.style.animationDuration = (Math.random()*5 + 5) + 's';
+                document.body.appendChild(img);
+            }
+
+            // Lyric Engine
+            let engine = document.getElementById('lyric-engine');
+            lyrics.forEach((l, i) => {
+                let div = document.createElement('div');
+                div.className = 'lyric';
+                div.id = 'line-' + i;
+                div.innerText = l.text;
+                engine.appendChild(div);
+            });
+
+            setInterval(() => {
+                lyrics.forEach((l, i) => {
+                    if (audio.currentTime >= l.t) {
+                        document.querySelectorAll('.lyric').forEach(el => el.classList.remove('active'));
+                        document.getElementById('line-' + i).classList.add('active');
+                    }
+                });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
